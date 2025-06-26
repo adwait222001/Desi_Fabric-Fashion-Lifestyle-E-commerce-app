@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "122806099592",
+    "project_id": "cloth-project-d9ffb",
+    "storage_bucket": "cloth-project-d9ffb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122806099592:android:104d06d674137095a8093d",
+        "android_client_info": {
+          "package_name": "com.example.rangmahal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxHm5wQR5QMpxJasm-5M7lxocw-CvBFwQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

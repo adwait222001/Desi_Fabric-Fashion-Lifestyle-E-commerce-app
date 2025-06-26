@@ -1,0 +1,65 @@
+name: rangmahal
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_auth: ^5.4.0
+  firebase_core: ^3.10.0
+  image_picker: ^1.1.2
+  http: ^1.2.2
+  url_launcher: ^6.3.1
+  image_cropper: ^9.0.0
+  carousel_slider: ^5.0.0
+  sqflite: ^2.2.0
+  path_provider: ^2.0.2
+  provider: ^6.1.2
+  lottie: ^2.7.0
+  shared_preferences: ^2.0.11
+  connectivity_plus: ^5.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/icon.jpeg"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icons/icon.jpeg
+    - assets/brands-logos/nike.png
+    - assets/icons/cap_logo.png
+    - assets/icons/jeans_logo.png
+    - assets/icons/tshirt_logo.jpg
+    - assets/brands-logos/adidas.png
+    - assets/cards_icons/diya.jpg
+    - assets/cards_icons/fashion-men-and-women.jpg
+    - assets/cards_icons/family-diwali.jpg
+    - assets/cards_icons/mens1.jpg
+    - assets/cards_icons/mens2.jpg
+    - assets/cards_icons/women1.jpg
+    - assets/cards_icons/women2.jpg
+    - assets/brands-logos/flyingmachine.png
+    - assets/brands-logos/lee.jpg
+    - assets/brands-logos/wrangler.png
+    - assets/brands-logos/reid_taylor.jpg
+    - assets/cards_icons/bhuvanbam.jpg
+    - assets/cards_icons/bharkasingh.jpg
+    - assets/cards_icons/childerens.jpg
+    - assets/icons/shoes_logo.png
+    - assets/icons/dress.png
+    - assets/icons/backpack.png
+    - assets/icons/formals.png
+    - assets/icons/glasses.png
+    - assets/icons/saree.png

@@ -1,0 +1,2 @@
+C:/Users/Admin/Desktop/flutterprojects/rangmahal/android/app/.cxx/RelWithDebInfo/5345w593/x86/CMakeFiles/edit_cache.dir
+C:/Users/Admin/Desktop/flutterprojects/rangmahal/android/app/.cxx/RelWithDebInfo/5345w593/x86/CMakeFiles/rebuild_cache.dir
