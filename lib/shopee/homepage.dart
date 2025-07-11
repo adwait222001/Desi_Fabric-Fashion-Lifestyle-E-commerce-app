@@ -655,6 +655,8 @@ class _HomepageState extends State<Homepage> {
               const SizedBox(height: 10),
 
               RecommendationsWidget(brand: 'Nike'),
+              //const SizedBox(height: 10),
+              const Recommendationswidget(),
               const SizedBox(height: 10),
 
               const Row(children: [Text("Brands",style: TextStyle(color: Colors.black,fontSize: 20,fontStyle: FontStyle.italic,),
@@ -1227,6 +1229,11 @@ class CurlyBracketsPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
 
+
+
+
+
+
 class ProductInfo {
   final String productName;
   final String brand;
@@ -1290,9 +1297,6 @@ class RecommendationItem {
     );
   }
 }
-
-
-
 class RecommendResponse {
   final List<RecommendationItem> recommended;
 
@@ -1309,7 +1313,6 @@ class RecommendResponse {
 }
 Future<RecommendResponse?> fetchRecommendations(String brand) async {
   final uri = Uri.parse('http://192.168.29.214:5000/recommend?brand=nike'); // ✅ Update with actual IP
-
   try {
     final response = await http.get(uri);
 
@@ -1487,6 +1490,315 @@ class RecommendationsWidget extends StatelessWidget {
     );
   }
 }
+
+
+//part2
+
+
+
+
+
+
+
+class Styleimage {
+  final String type;
+  final String url;
+
+  Styleimage({required this.type, required this.url});
+
+  factory Styleimage.fromJson(Map<String, dynamic> json) {
+    return Styleimage(
+      type: json['type'] ?? '',
+      url: json['url'] ?? '',
+    );
+  }
+}
+class ProductBInfo {
+  final String productName;
+  final String brand;
+  final double price;
+  final double discountedPrice;
+
+  ProductBInfo({
+    required this.productName,
+    required this.brand,
+    required this.price,
+    required this.discountedPrice,
+  });
+
+  factory ProductBInfo.fromJson(Map<String, dynamic> json) {
+    return ProductBInfo(
+      productName: json['productName'],
+      brand: json['brand'],
+      price: (json['price'] as num).toDouble(),
+      discountedPrice: (json['discountedPrice'] as num).toDouble(),
+    );
+  }
+}
+class ItemA {
+  final String gender;
+  final String imageName;
+  final String imageUrl;
+  final ProductBInfo productInfo;
+  final List<Styleimage> styleImages;
+
+  ItemA({
+    required this.gender,
+    required this.imageName,
+    required this.imageUrl,
+    required this.productInfo,
+    required this.styleImages,
+  });
+
+  factory ItemA.fromJson(Map<String, dynamic> json) {
+    return ItemA(
+      gender: json['gender'],
+      imageName: json['image_name'],
+      imageUrl: json['image_url'],
+      productInfo: ProductBInfo.fromJson(json['product_info']),
+      styleImages: (json['styleImages'] as List<dynamic>)
+          .map((e) => Styleimage.fromJson(e))
+          .toList(),
+    );
+  }
+}
+
+
+
+class RecommendResult {
+  final List<ItemA> recommended;
+
+  RecommendResult({required this.recommended});
+
+  factory RecommendResult.fromJson(Map<String, dynamic> json) {
+    var list = json['recommended'] as List<dynamic>? ?? [];
+    return RecommendResult(
+      recommended: list
+          .map((item) => ItemA.fromJson(item as Map<String, dynamic>))
+          .toList(),
+    );
+  }
+}
+
+
+
+Future<RecommendResult?> fetchResult() async {
+  try{
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw Exception('User not logged in');
+    }
+    print("Current User ID: ${user.uid}");
+    final response = await http.get(Uri.parse('http://192.168.29.214:5000/recommend_from_itemstring?user_id=${user.uid}'),);
+    if (response.statusCode == 200) {
+      return RecommendResult.fromJson(json.decode(response.body));
+    } else {
+      return null;
+    }
+
+  }catch(e){
+    return null;
+  }
+}
+
+
+class Recommendationswidget extends StatelessWidget {
+  const Recommendationswidget({super.key});
+
+  Future<RecommendResult?> fetchResult() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        print('User not logged in');
+        return null;
+      }
+
+      final url =
+          'http://192.168.29.214:5000/recommend_from_itemstring?user_id=${user.uid}';
+      print("Calling API: $url");
+
+      final response = await http.get(Uri.parse(url));
+
+      print("Status Code: ${response.statusCode}");
+      print("Response Body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        return RecommendResult.fromJson(json.decode(response.body));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("Exception during fetch: $e");
+      return null;
+    }
+  }
+  @override
+  Widget build(BuildContext context)
+
+  {
+    return FutureBuilder<RecommendResult?>(
+      future: fetchResult(),
+      builder: (context, snapshot)
+      {
+        print('State: ${snapshot.connectionState}');
+        print('Error: ${snapshot.error}');
+        print('Data: ${snapshot.data}');
+        if (snapshot.connectionState != ConnectionState.done ||
+            snapshot.hasError ||
+            snapshot.data == null ||
+            snapshot.data!.recommended.isEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        final items = snapshot.data!.recommended;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Row(
+                children: [
+                  Text(
+                    "Based on ordered previously",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 330,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  final info = item.productInfo;
+
+                  final Map<String, dynamic> productMap = {
+                    "image_url": item.imageUrl,
+                    "product_info": {
+                      "productName": info.productName,
+                      "brand": info.brand,
+                      "price": info.price,
+                      "discountedPrice": info.discountedPrice,
+                    },
+                  };
+
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DetailPage(
+                            product: productMap,
+                            relatedProducts: items
+                                .map((e) => {
+                              "image_url": e.imageUrl,
+                              "product_info": {
+                                "productName": e.productInfo.productName,
+                                "brand": e.productInfo.brand,
+                                "price": e.productInfo.price,
+                                "discountedPrice": e.productInfo.discountedPrice,
+                              }
+                            })
+                                .toList(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: SizedBox(
+                      width: 180,
+                      child: Card(
+                        elevation: 4,
+                        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                                child: Image.network(
+                                  item.imageUrl,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                info.productName,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                info.brand,
+                                style: const TextStyle(fontSize: 12, color: Colors.grey),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '₹${info.discountedPrice}',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  if (info.discountedPrice < info.price)
+                                    Text(
+                                      '₹${info.price}',
+                                      style: const TextStyle(
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: 12,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  sharedCartManager.addToCart(productMap);
+                                  sharedCartManager.showCartDialog(context, () {});
+                                },
+                                child: const Text("Buy Now", style: TextStyle(fontSize: 14)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 

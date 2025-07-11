@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'shopping_cart.dart'; // CartManager
@@ -56,8 +55,8 @@ class _PaymentWindowState extends State<PaymentWindow> {
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(context); // Close dialog
-                        _placeOrder(); // Trigger backend call
+                        Navigator.pop(context);
+                        _placeOrder();
                       },
                       child: const Text("Buy Now"),
                     ),
@@ -72,7 +71,7 @@ class _PaymentWindowState extends State<PaymentWindow> {
   }
 
   Future<void> _placeOrder() async {
-    const String apiUrl = 'http://192.168.29.214:5000/add_order_path'; // Replace this with your backend IP
+    const String apiUrl = 'http://192.168.29.214:5000/add_order_path';
 
     try {
       final user = FirebaseAuth.instance.currentUser;
@@ -83,11 +82,17 @@ class _PaymentWindowState extends State<PaymentWindow> {
 
       final String userId = user.uid;
 
-      // Send product name and quantity as separate keys
+      // ✅ Updated to include full item details
       List<Map<String, dynamic>> simplifiedItems = widget.cartItems.map((item) {
+        final info = item['product_info'];
         return {
-          'productName': item['product_info']['productName'],
+          'productName': info['productName'],
           'quantity': item['quantity'],
+          'brand': info['brand'],
+          'colour': info['colour'],
+          'productType': info['productType'],
+          'price': info['price'],
+          'image_url': item['image_url'],
         };
       }).toList();
 
@@ -143,7 +148,7 @@ class _PaymentWindowState extends State<PaymentWindow> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context); // Close dialog
+              Navigator.pop(context);
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const Homepage()),

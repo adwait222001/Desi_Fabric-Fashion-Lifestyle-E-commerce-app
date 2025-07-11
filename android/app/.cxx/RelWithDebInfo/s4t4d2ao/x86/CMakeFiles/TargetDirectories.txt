@@ -1,0 +1,2 @@
+C:/Users/Admin/Desktop/rangmahal (2)/rangmahal/android/app/.cxx/RelWithDebInfo/s4t4d2ao/x86/CMakeFiles/edit_cache.dir
+C:/Users/Admin/Desktop/rangmahal (2)/rangmahal/android/app/.cxx/RelWithDebInfo/s4t4d2ao/x86/CMakeFiles/rebuild_cache.dir
