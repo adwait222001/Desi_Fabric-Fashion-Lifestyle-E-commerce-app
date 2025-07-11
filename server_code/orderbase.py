@@ -1,7 +1,9 @@
-from flask import request, jsonify
+from flask import Flask, request, jsonify
 import sqlite3
 import json
 from datetime import datetime, timedelta
+
+app = Flask(__name__)
 
 ORDER_DB = 'order_data.db'
 HISTORY_DB = 'orderhistory.db'
@@ -72,6 +74,7 @@ def archive_expired_orders():
         print(f"[ERROR] Failed to archive orders: {e}")
 
 
+@app.route('/add_order_path', methods=['POST'])
 def add_order():
     data = request.get_json()
     user_id = data.get('user_id')
@@ -83,7 +86,20 @@ def add_order():
         return jsonify({"message": "Missing required fields"}), 400
 
     try:
-        items_json = json.dumps(items)
+        # 🔄 Extract and store only specific fields from each item (ignore price)
+        processed_items = []
+        for item in items:
+            processed_item = {
+                'productName': item.get('productName'),
+                'brand': item.get('brand'),
+                'quantity': item.get('quantity'),
+                'colour': item.get('colour'),
+                'productType': item.get('productType'),
+                'image_url': item.get('image_url')
+            }
+            processed_items.append(processed_item)
+
+        items_json = json.dumps(processed_items)
         order_date = datetime.now()
         delivery_date = order_date + timedelta(days=4)
 
@@ -103,6 +119,7 @@ def add_order():
         return jsonify({"message": f"Database error: {e}"}), 500
 
 
+@app.route('/get_orders', methods=['GET'])
 def get_orders():
     user_id = request.args.get('user_id')
 
@@ -130,7 +147,7 @@ def get_orders():
         return jsonify({"message": f"Database error: {e}"}), 500
 
 
-# ✅ New function to get archived orders
+@app.route('/get_archived_orders', methods=['GET'])
 def get_archived_orders():
     user_id = request.args.get('user_id')
 
@@ -157,3 +174,8 @@ def get_archived_orders():
 
     except sqlite3.Error as e:
         return jsonify({"message": f"Database error: {e}"}), 500
+
+
+if __name__ == '__main__':
+    init_order_db()
+    app.run(debug=True, host='0.0.0.0', port=5000)

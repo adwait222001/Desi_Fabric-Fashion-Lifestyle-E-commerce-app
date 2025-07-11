@@ -9,7 +9,7 @@ from nltk.stem.porter import PorterStemmer
 app = Flask(__name__)
 
 # === Configuration ===
-SORTED_FOLDER = r"C:\Users\Admin\Desktop\rangmahal\server_code\data\sorted_data"
+SORTED_FOLDER = r"C:\Users\Admin\Desktop\rangmahal (2)\rangmahal\server_code\data\sorted_data"
 
 # === Load and clean Excel data ===
 men = pd.read_excel("mencasual.xlsx", sheet_name="Tshirts")

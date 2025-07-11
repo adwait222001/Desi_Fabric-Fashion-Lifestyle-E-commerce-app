@@ -4,7 +4,7 @@ import json
 
 app = Flask(__name__)
 
-SORTED_FOLDER = r"C:\Users\Admin\Desktop\rangmahal\server_code\data\sorted_data"
+SORTED_FOLDER = r"C:\Users\Admin\Desktop\rangmahal (2)\rangmahal\server_code\data\sorted_data"
 
 def fetch_images_with_discount(genders, articles, discount):
     if not genders or not articles:

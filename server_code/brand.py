@@ -4,8 +4,7 @@ import json
 
 app = Flask(__name__)
 
-SORTED_FOLDER = r"C:\Users\Admin\Desktop\rangmahal\server_code\data\sorted_data"
-
+SORTED_FOLDER = r"C:\Users\Admin\Desktop\rangmahal (2)\rangmahal\server_code\data\sorted_data"
 def fetch_images_by_brand(genders, articles, brand):
     if not genders or not articles or not brand:
         return {"error": "Missing parameters"}, 400
