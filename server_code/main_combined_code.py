@@ -18,6 +18,14 @@ from orderbase import (
 from apscheduler.schedulers.background import BackgroundScheduler
 from recommendsystem import recommend_tshirt, get_image_info
 from orderrecomendation import parse_ordered_items, recommend_from_folder
+#new import
+
+
+from recommendsystemb import recommend_tshirt_no_brand, get_image_info
+
+
+
+
 
 app = Flask(__name__)
 CORS(app)
@@ -185,6 +193,16 @@ def recommend_from_itemstring():
         all_recommendations.extend(recs)
 
     return jsonify({"recommended": all_recommendations})
+
+
+
+
+@app.route('/recommend_no_brand', methods=['GET'])
+def recommend_no_brand_api():
+    image_names = recommend_tshirt_no_brand()
+    image_info = get_image_info(image_names)
+    return jsonify({"recommended": image_info})
+
 
 
 

@@ -54,82 +54,245 @@ class _HomepageState extends State<Homepage> {
 
       ),
       drawer: const Sidebar(),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
+      body:
+    Stack(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: SizedBox(
+            width: 50, // strip width
+            child: Column(
+              children: [
+                Expanded(child: Container(color: Colors.orange)),
+                Expanded(child: Container(color: Colors.white)),
+                Expanded(child: Container(color: Colors.green)),
+              ],
+            ),
+          ),
+        ),
 
-              // PageView to Show One Card at a Time
-              SizedBox(
-                height: 300,
-                width: 400,
-                child: PageView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => shoplist(
-                              genders: ["Men", "Women","Boys","Girls"],  // ✅ Pass multiple genders
-                              articles: ["Tshirts","Jeans","Waistcoat","Stoles","Kurtis","Nehru jackets","Kurtas","Lehenga choli"], // ✅ Pass multiple articles
-                              route: '/get_images',
-                            ),
+        // Right strip
+        Align(
+          alignment: Alignment.centerRight,
+          child: SizedBox(
+            width: 50, // strip width
+            child: Column(
+              children: [
+                Expanded(child: Container(color: Colors.orange)),
+                Expanded(child: Container(color: Colors.white)),
+                Expanded(child: Container(color: Colors.green)),
+              ],
+            ),
+          ),
+        ),
+        SingleChildScrollView(        scrollDirection: Axis.vertical,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            // PageView to Show One Card at a Time
+            SizedBox(
+              height: 300,
+              width: 400,
+              child: PageView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => shoplist(
+                            genders: ["Men", "Women","Boys","Girls"],  // ✅ Pass multiple genders
+                            articles: ["Tshirts","Jeans","Waistcoat","Stoles","Kurtis","Nehru jackets","Kurtas","Lehenga choli"], // ✅ Pass multiple articles
+                            route: '/get_images',
                           ),
-                        );
+                        ),
+                      );
 
-                      },
-                      child: Card(
-                        color: Colors.yellowAccent,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  RichText(
-                                    text: const TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: "Diwali-BlockBuster-\n",
-                                          style: TextStyle(
-                                            color: Colors.deepOrange,
-                                            fontSize: 40,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: "50% Sale",
-                                          style: TextStyle(
-                                            color: Colors.deepOrange,
-                                            fontSize: 40,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                    },
+                    child: Card(
+                      color: Colors.yellowAccent,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                RichText(
+                                  text: const TextSpan(
                                     children: [
-                                      CustomPaint(
-                                        size: const Size(30, 140),
-                                        painter: CurlyBracketsPainter(isLeft: true),
+                                      TextSpan(
+                                        text: "Diwali-BlockBuster-\n",
+                                        style: TextStyle(
+                                          color: Colors.deepOrange,
+                                          fontSize: 40,
+                                        ),
                                       ),
-                                      Image.asset(
-                                        "assets/cards_icons/diya.jpg",
-                                        height: 140,
-                                        width: 260,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      CustomPaint(
-                                        size: const Size(30, 140),
-                                        painter: CurlyBracketsPainter(isLeft: false),
+                                      TextSpan(
+                                        text: "50% Sale",
+                                        style: TextStyle(
+                                          color: Colors.deepOrange,
+                                          fontSize: 40,
+                                        ),
                                       ),
                                     ],
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CustomPaint(
+                                      size: const Size(30, 140),
+                                      painter: CurlyBracketsPainter(isLeft: true),
+                                    ),
+                                    Image.asset(
+                                      "assets/cards_icons/diya.jpg",
+                                      height: 140,
+                                      width: 260,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    CustomPaint(
+                                      size: const Size(30, 140),
+                                      painter: CurlyBracketsPainter(isLeft: false),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => shoplist(
+                            genders: ["Men"],  // ✅ Pass multiple genders
+                            articles: ["Kurtis","Nehru jackets","Kurtas","Stoles"], // ✅ Pass multiple articles
+                            route: '/get_images',
+                          ),
+                        ),
+                      );
+                    },
+                    //work to be done in this card
+                    child: Card(
+                      color: Colors.purpleAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/cards_icons/mens1.jpg",
+                                  height: 190,
+                                  width: 120,
+                                  fit: BoxFit.cover,
+                                ),
+                                SizedBox(width: 20), // Space between images
+                                Image.asset(
+                                  "assets/cards_icons/mens2.jpg",
+                                  height: 190,
+                                  width: 120,
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 10), // Space between images and text
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: "त्योहार की खुशी-\n",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: "पारंपरिक परिधान के साथ!",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 30),
+
+            // Normal Scrolling Row (Swapped Card Positions)
+            SizedBox(
+              height: 300,
+              width: 400,
+              child: PageView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  GestureDetector(
+                    onTap: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => shoplist(
+                          genders: ["Men", "Women","Boys","Girls"],  // ✅ Pass multiple genders
+                          articles: ["Kurtis","Nehru jackets","Kurtas","Lehenga choli"], // ✅ Pass multiple articles
+                          route: '/get_images',
+                        ),
+                      ),
+                    );
+                    },
+                    child: Card(
+                      color: Colors.blue,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Center(
+                              child: Image.asset(
+                                "assets/cards_icons/family-diwali.jpg",
+                                height: 250,
+                                width: 160,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: "त्योहार की खुशी-\n",
+                                    style: TextStyle(
+                                      color: Colors.deepOrange,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text: "पारंपरिक परिधान के साथ!",
+                                    style: TextStyle(
+                                      color: Colors.deepOrange,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -138,232 +301,98 @@ class _HomepageState extends State<Homepage> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => shoplist(
-                              genders: ["Men"],  // ✅ Pass multiple genders
-                              articles: ["Kurtis","Nehru jackets","Kurtas","Stoles"], // ✅ Pass multiple articles
-                              route: '/get_images',
-                            ),
-                          ),
-                        );
-                      },
-                      //work to be done in this card
-                      child: Card(
-                        color: Colors.purpleAccent,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/cards_icons/mens1.jpg",
-                                    height: 190,
-                                    width: 120,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  SizedBox(width: 20), // Space between images
-                                  Image.asset(
-                                    "assets/cards_icons/mens2.jpg",
-                                    height: 190,
-                                    width: 120,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 10), // Space between images and text
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: "त्योहार की खुशी-\n",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: "पारंपरिक परिधान के साथ!",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 30),
-
-              // Normal Scrolling Row (Swapped Card Positions)
-              SizedBox(
-                height: 300,
-                width: 400,
-                child: PageView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    GestureDetector(
-                      onTap: () {Navigator.push(
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => shoplist(
-                            genders: ["Men", "Women","Boys","Girls"],  // ✅ Pass multiple genders
-                            articles: ["Kurtis","Nehru jackets","Kurtas","Lehenga choli"], // ✅ Pass multiple articles
+                            genders: ["Women"],  // ✅ Pass multiple genders
+                            articles: ["Sarees","Lehenga choli","Kurtis","Churidar","Dupatta","Kurta sets"], // ✅ Pass multiple articles
                             route: '/get_images',
                           ),
                         ),
                       );
-                      },
-                      child: Card(
-                        color: Colors.blue,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Center(
-                                child: Image.asset(
-                                  "assets/cards_icons/family-diwali.jpg",
-                                  height: 250,
-                                  width: 160,
+                    },
+                    //work to be done in this card
+                    child: Card(
+                      color: Colors.redAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/cards_icons/women1.jpg",
+                                  height: 190,
+                                  width: 120,
                                   fit: BoxFit.cover,
                                 ),
-                              ),
-                              const SizedBox(height: 10),
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: "त्योहार की खुशी-\n",
-                                      style: TextStyle(
-                                        color: Colors.deepOrange,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const TextSpan(
-                                      text: "पारंपरिक परिधान के साथ!",
-                                      style: TextStyle(
-                                        color: Colors.deepOrange,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
+                                SizedBox(width: 20), // Space between images
+                                Image.asset(
+                                  "assets/cards_icons/women2.jpg",
+                                  height: 190,
+                                  width: 120,
+                                  fit: BoxFit.cover,
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => shoplist(
-                              genders: ["Women"],  // ✅ Pass multiple genders
-                              articles: ["Sarees","Lehenga choli","Kurtis","Churidar","Dupatta","Kurta sets"], // ✅ Pass multiple articles
-                              route: '/get_images',
+                              ],
                             ),
-                          ),
-                        );
-                      },
-                      //work to be done in this card
-                      child: Card(
-                        color: Colors.redAccent,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                            SizedBox(height: 10), // Space between images and text
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
                                 children: [
-                                  Image.asset(
-                                    "assets/cards_icons/women1.jpg",
-                                    height: 190,
-                                    width: 120,
-                                    fit: BoxFit.cover,
+                                  TextSpan(
+                                    text: "त्योहार की खुशी-\n",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  SizedBox(width: 20), // Space between images
-                                  Image.asset(
-                                    "assets/cards_icons/women2.jpg",
-                                    height: 190,
-                                    width: 120,
-                                    fit: BoxFit.cover,
+                                  TextSpan(
+                                    text: "पारंपरिक परिधान के साथ!",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10), // Space between images and text
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: "त्योहार की खुशी-\n",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: "पारंपरिक परिधान के साथ!",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            ),
 
-                            ],
-                          ),
+                          ],
                         ),
                       ),
                     ),
+                  ),
 
-                  ],
-                ),
+                ],
               ),
-              const SizedBox(height: 30),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => shoplist(
-                        genders: ["Boys","Girls"],  // ✅ Pass multiple genders
-                        articles: ["Tshirts","Jeans","Waistcoat","Flip flops","Trousers"],
-                        route: '/get_images_40',// ✅ Pass multiple articles
-                      ),
+            ),
+            const SizedBox(height: 30),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => shoplist(
+                      genders: ["Boys","Girls"],  // ✅ Pass multiple genders
+                      articles: ["Tshirts","Jeans","Waistcoat","Flip flops","Trousers"],
+                      route: '/get_images_40',// ✅ Pass multiple articles
                     ),
-                  );
-                },
-                child: Card(
-                  color: Colors.green,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                  ),
+                );
+              },
+              child: Card(
+                color: Colors.green,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
                       children: [
                         Center(
                           child: Image.asset(
@@ -374,256 +403,13 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                         const SizedBox(width: 1),
-                  Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [RichText(
-                        textAlign: TextAlign.center,
-                        text: const TextSpan(
-                          text: "Top-Brands\n",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                      ),
-                        const SizedBox(height: 10), // Space added here
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text: "Min.40%off",
-                            style: TextStyle(
-                              color: Colors.blue[800],
-                              fontSize: 20,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ),],
-                    )
-                  ),
-                    ]),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              if(recommendation)
-                Row(children: [
-
-                ],),
-
-              //const SizedBox(height:30)
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => shoplist(
-                        genders: ["Men","Boys"],  // ✅ Pass multiple genders
-                        articles: ["Tights","Tshirts","Sweatshirts","Caps","Jackets"], route: '/get_images_20', // ✅ Pass multiple articles
-                      ),
-                    ),
-                  );
-
-                },
-                child: Card(
-                  color: Colors.grey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
                         Center(
-                          child: Image.asset(
-                            "assets/cards_icons/bhuvanbam.jpg",
-                            height: 250,
-                            width: 160,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(width: 1),
-                        Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              RichText(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [RichText(
                                 textAlign: TextAlign.center,
                                 text: const TextSpan(
-                                  text: "देख भाई,अपनी एंट्री\n",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 10), // Space added here
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  text: "तो,स्टैग एंट्री होती है",
-                                  style: TextStyle(
-                                    color: Colors.blue[800],
-                                    fontSize: 25,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height:20),
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  text: "Top-Brands",
-                                  style: TextStyle(
-                                    color: Colors.amber,
-                                    fontSize: 25,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ),
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  text: "20%-off",
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 25,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => shoplist(
-                        genders: ["Women","Girls"],  // ✅ Pass multiple genders
-                        articles: ["Tights","Tshirts","Sweatshirts","Caps","Jackets","Skirts","Dress"], route: '/get_images_30', // ✅ Pass multiple articles
-                      ),
-                    ),
-                  );
-
-                },
-                child: Card(
-                  color: Colors.black,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Center(
-                          child: Image.asset(
-                            "assets/cards_icons/bharkasingh.jpg",
-                            height: 250,
-                            width: 160,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(width: 1),
-                        Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: const TextSpan(
-                                  text: "I am queen of my life,\n",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 19,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 10), // Space added here
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  text: "without need for a king",
-                                  style: TextStyle(
-                                    color: Colors.blue[800],
-                                    fontSize: 18,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Column(children: [
-                                RichText(
-                                  textAlign: TextAlign.center,
-                                  text: TextSpan(
-                                    text: "Top Brands with great discount\n",
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 13,
-                                      fontStyle: FontStyle.italic,
-                                    ),
-                                  ),
-                                ),
-                                RichText(
-                                  textAlign: TextAlign.center,
-                                  text: TextSpan(
-                                    text: "Feel like a Queen\n",
-                                    style: TextStyle(
-                                      color: Colors.amberAccent,
-                                      fontSize: 25,
-                                      fontStyle: FontStyle.italic,
-                                    ),
-                                  ),
-                                ),
-                              ],)
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => shoplist(
-                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                        articles: ["Tshirts"], route: '/get_images_by_colour', // ✅ Pass multiple articles
-                      ),
-                    ),
-                  );
-                },
-                child: Card(
-                  color: Colors.greenAccent,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Center(
-                          child: Image.asset(
-                            "assets/cards_icons/fashion-men-and-women.jpg",
-                            height: 250,
-                            width: 160,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(width: 1),
-                        Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: const TextSpan(
-                                  text: "Style for Him & Her,\n",
+                                  text: "Top-Brands\n",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -631,560 +417,810 @@ class _HomepageState extends State<Homepage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 10), // Space added here
+                                const SizedBox(height: 10), // Space added here
+                                RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                    text: "Min.40%off",
+                                    style: TextStyle(
+                                      color: Colors.blue[800],
+                                      fontSize: 20,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
+                                ),],
+                            )
+                        ),
+                      ]),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            if(recommendation)
+              Row(children: [
+
+              ],),
+
+            //const SizedBox(height:30)
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => shoplist(
+                      genders: ["Men","Boys"],  // ✅ Pass multiple genders
+                      articles: ["Tights","Tshirts","Sweatshirts","Caps","Jackets"], route: '/get_images_20', // ✅ Pass multiple articles
+                    ),
+                  ),
+                );
+
+              },
+              child: Card(
+                color: Colors.grey,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Center(
+                        child: Image.asset(
+                          "assets/cards_icons/bhuvanbam.jpg",
+                          height: 250,
+                          width: 160,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(width: 1),
+                      Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: const TextSpan(
+                                text: "देख भाई,अपनी एंट्री\n",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10), // Space added here
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: "तो,स्टैग एंट्री होती है",
+                                style: TextStyle(
+                                  color: Colors.blue[800],
+                                  fontSize: 25,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height:20),
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: "Top-Brands",
+                                style: TextStyle(
+                                  color: Colors.amber,
+                                  fontSize: 25,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: "20%-off",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 25,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => shoplist(
+                      genders: ["Women","Girls"],  // ✅ Pass multiple genders
+                      articles: ["Tights","Tshirts","Sweatshirts","Caps","Jackets","Skirts","Dress"], route: '/get_images_30', // ✅ Pass multiple articles
+                    ),
+                  ),
+                );
+
+              },
+              child: Card(
+                color: Colors.black,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Center(
+                        child: Image.asset(
+                          "assets/cards_icons/bharkasingh.jpg",
+                          height: 250,
+                          width: 160,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(width: 1),
+                      Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: const TextSpan(
+                                text: "I am queen of my life,\n",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 19,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10), // Space added here
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: "without need for a king",
+                                style: TextStyle(
+                                  color: Colors.blue[800],
+                                  fontSize: 18,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Column(children: [
                               RichText(
                                 textAlign: TextAlign.center,
                                 text: TextSpan(
-                                  text: "Find Your Perfect Tee!",
+                                  text: "Top Brands with great discount\n",
                                   style: TextStyle(
-                                    color: Colors.blue[800],
-                                    fontSize: 19,
+                                    color: Colors.red,
+                                    fontSize: 13,
                                     fontStyle: FontStyle.italic,
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                              RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text: "Feel like a Queen\n",
+                                  style: TextStyle(
+                                    color: Colors.amberAccent,
+                                    fontSize: 25,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                              ),
+                            ],)
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            const RecommendationsWidgetc(),
+            const SizedBox(height: 30),
+
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => shoplist(
+                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                      articles: ["Tshirts"], route: '/get_images_by_colour', // ✅ Pass multiple articles
+                    ),
+                  ),
+                );
+              },
+              child: Card(
+                color: Colors.greenAccent,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Center(
+                        child: Image.asset(
+                          "assets/cards_icons/fashion-men-and-women.jpg",
+                          height: 250,
+                          width: 160,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(width: 1),
+                      Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: const TextSpan(
+                                text: "Style for Him & Her,\n",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10), // Space added here
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: "Find Your Perfect Tee!",
+                                style: TextStyle(
+                                  color: Colors.blue[800],
+                                  fontSize: 19,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            RecommendationsWidget(brand: 'Nike'),
+            //const SizedBox(height: 10),
+            const Recommendationswidget(),
+            const SizedBox(height: 10),
+
+            const Row(children: [Text("Brands",style: TextStyle(color: Colors.black,fontSize: 20,fontStyle: FontStyle.italic,),
+            )
+            ],
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Bshoplist(
+                                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                                      articles: ["Tshirts","Sports shoes","SweatShirts"],
+                                      brand: 'Nike',
+                                      route:'/get_by_brand',
+                                    ),
+                                  ),
+                                );
+
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(110),
+                                child: Image.asset(
+                                  'assets/brands-logos/nike.png',
+                                  width: 150,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Text("NIKE", style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                        SizedBox(width: 50),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Bshoplist(
+                                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                                      articles: ["Tshirts","Sports shoes","SweatShirts"],
+                                      brand: 'ADIDAS',
+                                      route:'/get_by_brand',
+                                    ),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(110),
+                                child: Image.asset(
+                                  'assets/brands-logos/adidas.png',
+                                  width: 160,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Text("ADIDAS", style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                        const SizedBox(width: 40),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Bshoplist(
+                                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                                      articles: ["Shirts","Blazers"],
+                                      brand: 'Reid %26 Taylor',
+                                      route:'/get_by_brand',
+                                    ),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(110),
+                                child: Image.asset(
+                                  'assets/brands-logos/reid_taylor.jpg',
+                                  width: 150,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Text("REID-TAYLOR", style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                        const SizedBox(width: 20),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Bshoplist(
+                                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                                      articles: ["Jeans"],
+                                      brand: 'Flying Machine',
+                                      route:'/get_by_brand',
+                                    ),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(110),
+                                child: Image.asset(
+                                  'assets/brands-logos/flyingmachine.png',
+                                  width: 180,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Text("FLYING-MACHINE", style: TextStyle(fontSize: 14)),
+                          ],
+                        ),
+                        const SizedBox(width: 20),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Bshoplist(
+                                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                                      articles: ["Jeans","Tshirts"],
+                                      brand: 'Lee',
+                                      route:'/get_by_brand',
+                                    ),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(110),
+                                child: Image.asset(
+                                  'assets/brands-logos/lee.jpg',
+                                  width: 180,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Text("LEE", style: TextStyle(fontSize: 15)),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                ),
-              ),
-
-              const SizedBox(height: 10),
-
-              RecommendationsWidget(brand: 'Nike'),
-              //const SizedBox(height: 10),
-              const Recommendationswidget(),
-              const SizedBox(height: 10),
-
-              const Row(children: [Text("Brands",style: TextStyle(color: Colors.black,fontSize: 20,fontStyle: FontStyle.italic,),
-                  )
                 ],
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Bshoplist(
-                                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                                        articles: ["Tshirts","Sports shoes","SweatShirts"],
-                                        brand: 'Nike',
-                                        route:'/get_by_brand',
-                                      ),
+            ),
+            RecommendationsWidget(brand: 'Nike'),
+            const SizedBox(height: 10),
+            Center(child:Text("CATEGORIES",style: TextStyle(color: Colors.black,fontSize: 20,fontStyle: FontStyle.italic,),),),
+            const SizedBox(height: 10),
+            //look for this part of code
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    //route-check here
+                                    builder: (context) => shoplist(
+                                      genders: ["Men","Women","Boys","Girls"],  // ✅ Pass multiple genders
+                                      articles: ["Caps"], // ✅ Pass multiple articles
+                                      route: '/get_images_30',
                                     ),
-                                  );
-
-                                },
-                                borderRadius: BorderRadius.circular(110),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(110),
                                   child: Image.asset(
-                                    'assets/brands-logos/nike.png',
-                                    width: 150,
-                                    height: 100,
+                                    'assets/icons/cap_logo.png',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                              Text("NIKE", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                          SizedBox(width: 50),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Bshoplist(
-                                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                                        articles: ["Tshirts","Sports shoes","SweatShirts"],
-                                        brand: 'ADIDAS',
-                                        route:'/get_by_brand',
-                                      ),
+                            ),
+                            Text("CAPS", style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                        SizedBox(width: 50),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => shoplist(
+                                      genders: ["Men","Women","Boys","Girls"],  // ✅ Pass multiple genders
+                                      articles: ["Jeans"], // ✅ Pass multiple articles
+                                      route: '/get_images_30',
                                     ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(110),
                                   child: Image.asset(
-                                    'assets/brands-logos/adidas.png',
-                                    width: 160,
-                                    height: 100,
+                                    'assets/icons/jeans_logo.png',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                              Text("ADIDAS", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                          const SizedBox(width: 40),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Bshoplist(
-                                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                                        articles: ["Shirts","Blazers"],
-                                        brand: 'Reid %26 Taylor',
-                                        route:'/get_by_brand',
-                                      ),
+                            ),
+                            Text("JEANS", style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                        const SizedBox(width: 40),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => shoplist(
+                                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                                      articles: ["Tshirts"], // ✅ Pass multiple articles
+                                      route: '/get_images_30',
                                     ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(110),
                                   child: Image.asset(
-                                    'assets/brands-logos/reid_taylor.jpg',
-                                    width: 150,
-                                    height: 100,
+                                    'assets/icons/tshirt_logo.jpg',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                              Text("REID-TAYLOR", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                          const SizedBox(width: 20),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Bshoplist(
-                                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                                        articles: ["Jeans"],
-                                        brand: 'Flying Machine',
-                                        route:'/get_by_brand',
-                                      ),
+                            ),
+                            Text("T-Shirts", style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                        const SizedBox(width: 40),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => shoplist(
+                                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                                      articles: ["Casual shoes","Sport sandals","Formal shoes"], // ✅ Pass multiple articles
+                                      route: '/get_images_30',
                                     ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(110),
                                   child: Image.asset(
-                                    'assets/brands-logos/flyingmachine.png',
-                                    width: 180,
-                                    height: 100,
+                                    'assets/icons/shoes_logo.png',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                              Text("FLYING-MACHINE", style: TextStyle(fontSize: 14)),
-                            ],
-                          ),
-                          const SizedBox(width: 20),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Bshoplist(
-                                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                                        articles: ["Jeans","Tshirts"],
-                                        brand: 'Lee',
-                                        route:'/get_by_brand',
-                                      ),
+                            ),
+                            Text("SHOES", style: TextStyle(fontSize: 14)),
+                          ],
+                        ),
+                        const SizedBox(width: 20),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => shoplist(
+                                      genders: ["Women","Girls"],  // ✅ Pass multiple genders
+                                      articles: ["Sarees","Lehenga choli","Churidar"], // ✅ Pass multiple articles
+                                      route: '/get_images_30',
                                     ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(120),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(110),
                                   child: Image.asset(
-                                    'assets/brands-logos/lee.jpg',
-                                    width: 180,
-                                    height: 100,
+                                    'assets/icons/saree.png',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                              Text("LEE", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                            Text("ETENIC-WEAR", style: TextStyle(fontSize: 14)),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  // New row with fixed-sized ClipRRect
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => shoplist(
+                                      genders: ["Men","Women","Girls"],  // ✅ Pass multiple genders
+                                      articles: ["Backpacks","Duffel bag","Laptop bag","Backpacks"], // ✅ Pass multiple articles
+                                      route: '/get_images_30',
+                                    ),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(110),
+                                  child: Image.asset(
+                                    'assets/icons/backpack.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text("BAGS", style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                        SizedBox(width: 40),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => shoplist(
+                                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                                      articles: ["Blazers","Trousers","Ties","Formal shoes"], // ✅ Pass multiple articles
+                                      route: '/get_images_30',
+                                    ),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(110),
+                                  child: Image.asset(
+                                    'assets/icons/formals.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text("FORMALS", style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                        const SizedBox(width: 40),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => shoplist(
+                                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                                      articles: ["Lounge pants","Lounge shorts","shorts","Tshirts"], // ✅ Pass multiple articles
+                                      route: '/get_images_30',
+                                    ),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(110),
+                                  child: Image.asset(
+                                    'assets/icons/tshirt_logo.jpg',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text("CASUAL-WEAR", style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                        const SizedBox(width: 20),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => shoplist(
+                                      genders: ["Women","Men"],  // ✅ Pass multiple genders
+                                      articles: ["Sunglasses"], // ✅ Pass multiple articles
+                                      route: '/get_images_30',
+                                    ),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(110),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(110),
+                                  child: Image.asset(
+                                    'assets/icons/glasses.png',
+                                    width: 100,
+                                    height: 90,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text("GLASSES", style: TextStyle(fontSize: 14)),
+                          ],
+                        ),
+                        const SizedBox(width: 20),
+                        Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => shoplist(
+                                      genders: ["Women"],  // ✅ Pass multiple genders
+                                      articles: ["Dresses","Kurtis","Salwar and dupatta","Kurtas","Lehenga choli","Skirts","Tops"],
+                                      route: '/get_images_30',
+                                    ),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(120),
+                              child: SizedBox(
+                                width: 150,
+                                height: 100,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(110),
+                                  child: Image.asset(
+                                    'assets/icons/dress.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text("Dress", style: TextStyle(fontSize: 15)),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              Center(child:Text("CATEGORIES",style: TextStyle(color: Colors.black,fontSize: 20,fontStyle: FontStyle.italic,),),),
-              const SizedBox(height: 10),
-              //look for this part of code
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      //route-check here
-                                      builder: (context) => shoplist(
-                                        genders: ["Men","Women","Boys","Girls"],  // ✅ Pass multiple genders
-                                        articles: ["Caps"], // ✅ Pass multiple articles
-                                        route: '/get_images_30',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(110),
-                                    child: Image.asset(
-                                      'assets/icons/cap_logo.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text("CAPS", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                          SizedBox(width: 50),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => shoplist(
-                                        genders: ["Men","Women","Boys","Girls"],  // ✅ Pass multiple genders
-                                        articles: ["Jeans"], // ✅ Pass multiple articles
-                                        route: '/get_images_30',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(110),
-                                    child: Image.asset(
-                                      'assets/icons/jeans_logo.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text("JEANS", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                          const SizedBox(width: 40),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => shoplist(
-                                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                                        articles: ["Tshirts"], // ✅ Pass multiple articles
-                                        route: '/get_images_30',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(110),
-                                    child: Image.asset(
-                                      'assets/icons/tshirt_logo.jpg',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text("T-Shirts", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                          const SizedBox(width: 40),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => shoplist(
-                                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                                        articles: ["Casual shoes","Sport sandals","Formal shoes"], // ✅ Pass multiple articles
-                                        route: '/get_images_30',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(110),
-                                    child: Image.asset(
-                                      'assets/icons/shoes_logo.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text("SHOES", style: TextStyle(fontSize: 14)),
-                            ],
-                          ),
-                          const SizedBox(width: 20),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => shoplist(
-                                        genders: ["Women","Girls"],  // ✅ Pass multiple genders
-                                        articles: ["Sarees","Lehenga choli","Churidar"], // ✅ Pass multiple articles
-                                        route: '/get_images_30',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(120),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(110),
-                                    child: Image.asset(
-                                      'assets/icons/saree.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text("ETENIC-WEAR", style: TextStyle(fontSize: 14)),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    // New row with fixed-sized ClipRRect
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => shoplist(
-                                        genders: ["Men","Women","Girls"],  // ✅ Pass multiple genders
-                                        articles: ["Backpacks","Duffel bag","Laptop bag","Backpacks"], // ✅ Pass multiple articles
-                                        route: '/get_images_30',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(110),
-                                    child: Image.asset(
-                                      'assets/icons/backpack.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text("BAGS", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                          SizedBox(width: 40),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => shoplist(
-                                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                                        articles: ["Blazers","Trousers","Ties","Formal shoes"], // ✅ Pass multiple articles
-                                        route: '/get_images_30',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(110),
-                                    child: Image.asset(
-                                      'assets/icons/formals.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text("FORMALS", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                          const SizedBox(width: 40),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => shoplist(
-                                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                                        articles: ["Lounge pants","Lounge shorts","shorts","Tshirts"], // ✅ Pass multiple articles
-                                        route: '/get_images_30',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(110),
-                                    child: Image.asset(
-                                      'assets/icons/tshirt_logo.jpg',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text("CASUAL-WEAR", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                          const SizedBox(width: 20),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => shoplist(
-                                        genders: ["Women","Men"],  // ✅ Pass multiple genders
-                                        articles: ["Sunglasses"], // ✅ Pass multiple articles
-                                        route: '/get_images_30',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(110),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(110),
-                                    child: Image.asset(
-                                      'assets/icons/glasses.png',
-                                      width: 100,
-                                      height: 90,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text("GLASSES", style: TextStyle(fontSize: 14)),
-                            ],
-                          ),
-                          const SizedBox(width: 20),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => shoplist(
-                                        genders: ["Women"],  // ✅ Pass multiple genders
-                                        articles: ["Dresses","Kurtis","Salwar and dupatta","Kurtas","Lehenga choli","Skirts","Tops"],
-                                        route: '/get_images_30',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                borderRadius: BorderRadius.circular(120),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(110),
-                                    child: Image.asset(
-                                      'assets/icons/dress.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text("Dress", style: TextStyle(fontSize: 15)),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            ),
 
 
-            ],
-          ),
+          ],
         ),
       ),
+    ),]
+
+    )
+
     );
   }
 }
@@ -1492,14 +1528,10 @@ class RecommendationsWidget extends StatelessWidget {
 }
 
 
+
+
+
 //part2
-
-
-
-
-
-
-
 class Styleimage {
   final String type;
   final String url;
@@ -1562,9 +1594,6 @@ class ItemA {
     );
   }
 }
-
-
-
 class RecommendResult {
   final List<ItemA> recommended;
 
@@ -1579,9 +1608,6 @@ class RecommendResult {
     );
   }
 }
-
-
-
 Future<RecommendResult?> fetchResult() async {
   try{
     final user = FirebaseAuth.instance.currentUser;
@@ -1600,8 +1626,6 @@ Future<RecommendResult?> fetchResult() async {
     return null;
   }
 }
-
-
 class Recommendationswidget extends StatelessWidget {
   const Recommendationswidget({super.key});
 
@@ -1790,6 +1814,273 @@ class Recommendationswidget extends StatelessWidget {
     );
   }
 }
+
+
+
+
+//part3
+class ProductInfoc {
+  final String productName;
+  final int price;
+  final int discountedPrice;
+
+  ProductInfoc({
+    required this.productName,
+    required this.price,
+    required this.discountedPrice,
+  });
+
+  factory ProductInfoc.fromJson(Map<String, dynamic> json) {
+    return ProductInfoc(
+      productName: json['productName'] ?? '',
+      price: json['price'] ?? 0,
+      discountedPrice: json['discountedPrice'] ?? 0,
+    );
+  }
+}
+
+class StyleImagec {
+  final String type;
+  final String url;
+
+  StyleImagec({required this.type, required this.url});
+
+  factory StyleImagec.fromJson(Map<String, dynamic> json) {
+    return StyleImagec(
+      type: json['type'] ?? '',
+      url: json['url'] ?? '',
+    );
+  }
+}
+
+class RecommendationItemc {
+  final String imageUrl;
+  final ProductInfoc productInfo;
+  final List<StyleImagec> styleImages;
+  final String gender;
+
+  RecommendationItemc({
+    required this.imageUrl,
+    required this.productInfo,
+    required this.styleImages,
+    required this.gender,
+  });
+
+  factory RecommendationItemc.fromJson(Map<String, dynamic> json) {
+    var styleImagesJson = json['styleImages'] as List<dynamic>? ?? [];
+
+    return RecommendationItemc(
+      imageUrl: json['image_url'],
+      productInfo: ProductInfoc.fromJson(json['product_info']),
+      styleImages: styleImagesJson
+          .map((e) => StyleImagec.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      gender: json['gender'] ?? '',
+    );
+  }
+}
+
+class RecommendResponsec {
+  final List<RecommendationItemc> recommended;
+
+  RecommendResponsec({required this.recommended});
+
+  factory RecommendResponsec.fromJson(Map<String, dynamic> json) {
+    var list = json['recommended'] as List<dynamic>? ?? [];
+    return RecommendResponsec(
+      recommended: list
+          .map((item) =>
+          RecommendationItemc.fromJson(item as Map<String, dynamic>))
+          .toList(),
+    );
+  }
+}
+
+Future<RecommendResponsec?> fetchRecommendationsc() async {
+  final uri = Uri.parse(
+      'http://192.168.29.214:5000/recommend_no_brand'); // ✅ Updated endpoint
+
+  try {
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      return RecommendResponsec.fromJson(json.decode(response.body));
+    } else {
+      return null;
+    }
+  } catch (e) {
+    return null;
+  }
+}
+
+class RecommendationsWidgetc extends StatelessWidget {
+  const RecommendationsWidgetc({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<RecommendResponsec?>(
+      future: fetchRecommendationsc(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done ||
+            snapshot.hasError ||
+            snapshot.data == null ||
+            snapshot.data!.recommended.isEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        final items = snapshot.data!.recommended;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 🔹 Title
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Row(
+                children: [
+                  Text(
+                    "Ethenic Wear",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // 🔹 Horizontal Scroll List
+            SizedBox(
+              height: 330, // Extra height for Buy button
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  final info = item.productInfo;
+
+                  // Map format expected by sharedCartManager
+                  final Map<String, dynamic> productMap = {
+                    "image_url": item.imageUrl,
+                    "product_info": {
+                      "productName": info.productName,
+                      "price": info.price,
+                      "discountedPrice": info.discountedPrice,
+                    },
+                  };
+
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => DetailPage(
+                            product: productMap,
+                            relatedProducts: items
+                                .map((e) => {
+                              "image_url": e.imageUrl,
+                              "product_info": {
+                                "productName":
+                                e.productInfo.productName,
+                                "price": e.productInfo.price,
+                                "discountedPrice":
+                                e.productInfo.discountedPrice,
+                              }
+                            })
+                                .toList(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: SizedBox(
+                      width: 180,
+                      child: Card(
+                        elevation: 4,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(8)),
+                                child: Image.network(
+                                  item.imageUrl,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (_, __, ___) =>
+                                  const Icon(Icons.broken_image),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                info.productName,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '₹${info.discountedPrice}',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  if (info.discountedPrice < info.price)
+                                    Text(
+                                      '₹${info.price}',
+                                      style: const TextStyle(
+                                        decoration:
+                                        TextDecoration.lineThrough,
+                                        fontSize: 12,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 6),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  sharedCartManager.addToCart(productMap);
+                                  sharedCartManager.showCartDialog(
+                                    context,
+                                        () {},
+                                  );
+                                },
+                                child: const Text(
+                                  "Buy Now",
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 
 
 
