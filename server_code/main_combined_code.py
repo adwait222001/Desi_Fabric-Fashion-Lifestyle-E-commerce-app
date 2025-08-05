@@ -24,6 +24,7 @@ from orderrecomendation import parse_ordered_items, recommend_from_folder
 from recommendsystemb import recommend_tshirt_no_brand, get_image_info
 
 
+from search import match_products_logic
 
 
 
@@ -205,6 +206,11 @@ def recommend_no_brand_api():
 
 
 
+@app.route('/match_products', methods=['GET'])
+def match_products_route():
+    query = request.args.get("query", "").strip()
+    result = match_products_logic(query)
+    return jsonify(result)
 
 
 

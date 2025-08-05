@@ -8,6 +8,7 @@ import 'package:rangmahal/shopee/shoplist.dart';
 import 'package:rangmahal/shopee/your_order.dart';
 
 import '../main.dart';
+import 'SearchPage.dart';
 import 'bshoplist.dart';
 import 'detailpage.dart';
 import 'shopping_cart.dart';
@@ -23,37 +24,81 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   final CartManager cartManager = CartManager();
   bool recommendation = false;
+  bool _showSearch = false;
+  TextEditingController _searchController = TextEditingController();
+
 
   @override
 
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.purpleAccent,
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
+        appBar: AppBar(
+          backgroundColor: Colors.purpleAccent,
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
           ),
+          title: _showSearch
+              ? TextField(
+            controller: _searchController,
+            autofocus: true,
+            decoration: const InputDecoration(
+              hintText: "Search products...",
+              border: InputBorder.none,
+            ),
+            textInputAction: TextInputAction.search,
+            onSubmitted: (value) {
+              if (value.trim().isNotEmpty) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        AccordingToYourSearch(query: value.trim()),
+                  ),
+                ).then((_) {
+                  // 🔹 Reset search state when returning to homepage
+                  setState(() {
+                    _showSearch = false;
+                    _searchController.clear();
+                  });
+                });
+              }
+            },
+          )
+              : const Text(""),
+          actions: [
+            IconButton(
+              icon: Icon(_showSearch ? Icons.close : Icons.search),
+              onPressed: () {
+                setState(() {
+                  if (_showSearch) {
+                    // Closing search
+                    _showSearch = false;
+                    _searchController.clear();
+                  } else {
+                    // Opening search
+                    _showSearch = true;
+                  }
+                });
+              },
+            ),
+            IconButton(
+              onPressed: () {
+                sharedCartManager.showCartDialog(context, () {
+                  setState(() {});
+                });
+              },
+              icon: const Icon(Icons.shopping_cart),
+            ),
+          ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              // Handle search action
-            },
-          ),
-          SizedBox(width: 20),
-          IconButton(onPressed: (){ sharedCartManager.showCartDialog(context, () {
-            setState(() {}); // if inside StatefulWidget
-          });}, icon: const Icon(Icons.shopping_cart))
-        ],
 
-      ),
-      drawer: const Sidebar(),
+        drawer: const Sidebar(),
       body:
     Stack(
       children: [
